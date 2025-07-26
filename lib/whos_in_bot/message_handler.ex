@@ -15,22 +15,22 @@ defmodule WhosInBot.MessageHandler do
     {:error, "Not a bot command"}
   end
 
-  defp execute_command(message = %{ command: "start_roll_call" }) do
+  defp execute_command(message = %{ command: "create" }) do
     RollCall.close_existing_roll_calls(message)
     RollCall.create_roll_call(message)
-    {:ok, "Roll call started"}
+    {:ok, "Lobby started"}
   end
 
   defp execute_command(%{ command: command, roll_call: nil }) do
     case is_known_command(command) do
-      true -> {:ok, "No roll call in progress"}
+      true -> {:ok, "No lobby in progress"}
       false -> {:error, "Unknown command"}
     end
   end
 
-  defp execute_command(message = %{ command: "end_roll_call" }) do
+  defp execute_command(message = %{ command: "end" }) do
     RollCall.close_existing_roll_calls(message)
-    {:ok, "Roll call ended"}
+    {:ok, "Lobby ended"}
   end
 
   defp execute_command(message = %{ command: "in" }) do

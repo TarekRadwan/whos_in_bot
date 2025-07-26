@@ -6,7 +6,7 @@ defmodule WhosInBot.Application do
 
     children = [
       {Plug.Cowboy, scheme: :http, plug: WhosInBot.Router, options: [port: Application.get_env(:whos_in_bot, :port, 5000)]},
-      supervisor(WhosInBot.Repo, [])
+      WhosInBot.Repo
     ]
 
     opts = [strategy: :one_for_one, name: WhosInBot.Supervisor]
